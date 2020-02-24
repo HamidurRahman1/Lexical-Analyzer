@@ -7,8 +7,8 @@ public class LexAnalyzer
 {
     public static void main(String[] args) throws IOException
     {
-        FileReader fileReader = new FileReader("src/cs316project/inps/in1.txt");
-        List<String> lines = fileReader.getLines();
-        System.out.println(fileReader.getTokens(lines).size());
+        List<String> tokens = new FileReader("src/cs316project/inps/in1.txt").getLines().getTokens();
+        System.out.println(tokens.size());
+        System.out.println(tokens);
     }
 }
