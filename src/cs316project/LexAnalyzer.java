@@ -3,10 +3,45 @@ package cs316project;
 import java.io.IOException;
 import java.util.List;
 
-import static cs316project.State.EPlusMinus;
-
 public class LexAnalyzer
 {
+    public void validateTokens(List<String> tokens)
+    {
+        if(tokens == null) throw new NullPointerException("Null list given.");
+
+        tokens.forEach(token ->
+        {
+            Token token1 = driver(token);
+            System.out.println(token1);
+        });
+    }
+
+    private Token driver(String token)
+    {
+        State nextState = State.Start;
+        Token partialToken = new Token();
+
+        for(int i = 0; i < token.length(); i++)
+        {
+            char c = token.charAt(i);
+            nextState = nextState(partialToken.getState(), c);
+
+            if(nextState == State.UNDEF)
+            {
+                if(partialToken.getState().isFinal())
+                    return partialToken;
+                else
+                {
+
+                }
+            }
+            else
+            {
+
+            }
+        }
+    }
+
     private State nextState(State state, char c)
     {
         switch (state)
@@ -96,7 +131,7 @@ public class LexAnalyzer
                 if(Character.isDigit(c))
                     return State.FloatE;
                 else if(c == '+' || c == '-')
-                    return EPlusMinus;
+                    return State.EPlusMinus;
                 else
                     return State.UNDEF;
             case EPlusMinus:
