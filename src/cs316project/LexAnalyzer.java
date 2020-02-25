@@ -1,44 +1,57 @@
 package cs316project;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class LexAnalyzer
 {
+    private List<Token> tokens = new LinkedList<>();
+
     public void validateTokens(List<String> tokens)
     {
         if(tokens == null) throw new NullPointerException("Null list given.");
 
-        tokens.forEach(token ->
-        {
-            Token token1 = driver(token);
-            System.out.println(token1);
-        });
+        tokens.forEach(token -> driver(token));
     }
 
-    private Token driver(String token)
+    private void driver(String originalToken)
     {
-        State nextState = State.Start;
-        Token partialToken = new Token();
+        Token token = new Token();
+        State nextState;
 
-        for(int i = 0; i < token.length(); i++)
+        for(int i = 0; i < originalToken.length(); i++)
         {
-            char c = token.charAt(i);
-            nextState = nextState(partialToken.getState(), c);
+            char c = originalToken.charAt(i);
+            nextState = nextState(token.getState(), c);
 
             if(nextState == State.UNDEF)
             {
-                if(partialToken.getState().isFinal())
-                    return partialToken;
+                if(token.getState().isFinal())
+                {
+                    Token t1 = new Token(token.getToken()+String.valueOf(c), token.getState(), true);
+                    tokens.add(t1);
+                    token = new Token("", State.Start, false);
+                }
                 else
                 {
-
+                    Token t1 = new Token(token.getToken()+String.valueOf(c), token.getState(), false);
+                    tokens.add(t1);
+                    System.out.println(t1.getToken()+" : Lexical Error, invalid token");
+                    token = new Token("", State.Start, false);
                 }
             }
             else
             {
-
+                token.setState(nextState);
+                token.setToken(token.getToken()+c);
             }
+        }
+
+        if(token.getState().isFinal())
+        {
+            token.setValid(true);
+            tokens.add(token);
         }
     }
 
@@ -49,6 +62,8 @@ public class LexAnalyzer
             case Start:
                 if(Character.isLetter(c))
                     return State.Id;
+                if(Character.isDigit(c))
+                    return State.Int;
                 else if(c == '+')
                     return State.Plus;
                 else if (c == '-')
@@ -152,9 +167,18 @@ public class LexAnalyzer
     public static void main(String[] args) throws IOException
     {
         List<String> tokens = new FileReader("src/cs316project/inps/in1.txt").getLines().getTokens();
-        System.out.println(tokens.size());
-        System.out.println(tokens);
-        LexAnalyzer analyzer = new LexAnalyzer();
-
+        LexAnalyzer lexAnalyzer = new LexAnalyzer();
+        lexAnalyzer.validateTokens(tokens);
+        lexAnalyzer.tokens.forEach(token ->
+        {
+            if(token.isValid())
+            {
+                System.out.println(token.getToken() + " : " + token.getState());
+            }
+            else
+            {
+                System.out.println(token.getToken() + " : Lexical Error, invalid token");
+            }
+        });
     }
 }

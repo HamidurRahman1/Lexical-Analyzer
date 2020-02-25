@@ -3,17 +3,17 @@ package cs316project;
 public class Token
 {
     private String token;
-    private StringBuilder tokenValue;
     private State state;
     private boolean isValid;
 
     public Token() {
+        this("", State.Start, false);
     }
 
-    public Token(String token) {
-        this.state = State.Start;
+    public Token(String token, State state, boolean isValid) {
         this.token = token;
-        this.tokenValue = new StringBuilder();
+        this.state = state;
+        this.isValid = isValid;
     }
 
     public String getToken() {
@@ -24,12 +24,12 @@ public class Token
         this.token = token;
     }
 
-    public StringBuilder getTokenValue() {
-        return tokenValue;
+    public boolean isValid() {
+        return isValid;
     }
 
-    public void setTokenValue(StringBuilder tokenValue) {
-        this.tokenValue = tokenValue;
+    public void setValid(boolean valid) {
+        isValid = valid;
     }
 
     public State getState() {
@@ -44,8 +44,8 @@ public class Token
     public String toString() {
         return "Token{" +
                 "token='" + token + '\'' +
-                ", tokenValue='" + tokenValue.toString() + '\'' +
-                ", state=" + state +
+                ", state=" + state.toString() +
+                ", isValid=" + isValid +
                 '}';
     }
 }
