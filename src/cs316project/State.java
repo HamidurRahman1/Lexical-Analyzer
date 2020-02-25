@@ -6,23 +6,29 @@ public enum State
     Start,                  // 0
     Period,                 // 1
     E,                      // 2
-    F,                      // 3
-    EPlusMinus,             // 4
+    EPlusMinus,             // 3
 
     // final states
-    Id,                     // 5
-    Int,                    // 6
-    Float,                  // 7
-    FloatE,                 // 8
-    FloatF,                 // 9
-    Plus,                   // 10
-    Minus,                  // 11
-    Times,                  // 12
-    Div,                    // 13
-    LParen,                 // 14
-    RParen,                 // 15
+    Id,                     // 4
+    Int,                    // 5
+    Float,                  // 6
+    FloatE,                 // 7
+    FloatF,                 // 8
+    Plus,                   // 9
+    Minus,                  // 10
+    Times,                  // 11
+    Div,                    // 12
+    Lt,                     // 13
+    Le,                     // 14
+    Gt,                     // 15
+    Ge,                     // 16
+    Eq,                     // 17
+    LParen,                 // 18
+    RParen,                 // 19
+    LBrace,                 // 20
+    RBrace,                 // 21
 
-    UNDEF;
+    UNDEF;                  // 22
 
     public boolean isFinal()
     {
