@@ -1,10 +1,9 @@
-package cs316project;
 
 public enum State
 {
     // non-final states     ordinal number
     Start,                  // 0
-    Period,                 // 1
+    Dot,                    // 1
     E,                      // 2
     EPlusMinus,             // 3
 
@@ -14,9 +13,9 @@ public enum State
     Float,                  // 6
     FloatE,                 // 7
     FloatF,                 // 8
-    Plus,                   // 9
-    Minus,                  // 10
-    Times,                  // 11
+    Add,                    // 9
+    Sub,                    // 10
+    Mul,                    // 11
     Div,                    // 12
     Lt,                     // 13
     Le,                     // 14
@@ -28,7 +27,18 @@ public enum State
     LBrace,                 // 20
     RBrace,                 // 21
 
-    UNDEF;                  // 22
+    Keyword_if,             // 22
+    Keyword_then,           // 23
+    Keyword_else,           // 24
+    Keyword_or,             // 25
+    Keyword_and,            // 26
+    Keyword_not,            // 27
+    Keyword_pair,           // 28
+    Keyword_first,          // 29
+    Keyword_second,         // 30
+    Keyword_nil,            // 31
+
+    UNDEF;                  // 32
 
     public boolean isFinal()
     {
