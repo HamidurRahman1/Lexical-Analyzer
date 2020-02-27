@@ -1,5 +1,0 @@
-iff
-then
-else+
-ore
-andq

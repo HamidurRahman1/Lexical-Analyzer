@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,10 +11,9 @@ public class FileUtil
     public static BufferedReader inputStream;
     public static PrintWriter outputStream;
 
-    public static int currentStream; // the current input character on "inputStream"
-    public static char currentChar; // used to convert the variable "currentStream" to the char type whenever necessary
+    public static int currentStream;
+    public static char currentChar;
 
-    // Returns the next character on the input stream.
     public static int getNextChar()
     {
         try
@@ -27,8 +27,6 @@ public class FileUtil
         }
     }
 
-    // Returns the next non-whitespace character on the input stream.
-    // Returns -1, end-of-stream, if the end of the input stream is reached.
     public static int getChar()
     {
         int i = getNextChar();
@@ -47,8 +45,6 @@ public class FileUtil
         outputStream.println(s);
     }
 
-    // Sets the input and output streams to "inFile" and "outFile", respectively.
-    // Sets the current input character "currentStream" to the first character on the input stream.
     public static void setIO(String inFile, String outFile)
     {
         try

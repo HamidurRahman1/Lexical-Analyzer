@@ -1,13 +1,14 @@
+
 public class LexAnalyzer extends FileUtil
 {
-    public static String t;
+    public static String token;
     public static State state;
 
     private static int driver()
     {
         State nextSt;
 
-        t = "";
+        token = "";
 
         state = State.Start;
 
@@ -36,7 +37,7 @@ public class LexAnalyzer extends FileUtil
                 }
                 else
                 {
-                    t = t+ currentChar;
+                    token = token + currentChar;
                     currentStream = getNextChar();
                     return 0;
                 }
@@ -44,7 +45,7 @@ public class LexAnalyzer extends FileUtil
             else
             {
                 state = nextSt;
-                t = t+ currentChar;
+                token = token + currentChar;
                 currentStream = getNextChar();
             }
         }
@@ -70,7 +71,7 @@ public class LexAnalyzer extends FileUtil
     {
         int i = driver();
         if ( i == 0 )
-            displayln(t + " : Lexical Error, invalid token");
+            displayln(token + " : Lexical Error, invalid token");
     }
 
     private static State nextState(State state, char c)
@@ -124,13 +125,13 @@ public class LexAnalyzer extends FileUtil
                 else
                     return State.UNDEF;
             case Id:
-//                if(t.equals("if"))
+//                if(token.equals("if"))
 //                        return State.Keyword_if;
-//                else if(t.equals("then"))
+//                else if(token.equals("then"))
 //                    return State.Keyword_then;
-//                else if(t.equals("else"))
+//                else if(token.equals("else"))
 //                    return State.Keyword_else;
-//                else if(t.equals("or"))
+//                else if(token.equals("or"))
 //                        return State.Keyword_or;
 //                else
                 if(Character.isLetterOrDigit(c))
@@ -197,7 +198,7 @@ public class LexAnalyzer extends FileUtil
 
     public static State isKeyword()
     {
-        switch (t)
+        switch (token)
         {
             case "if":
                 return State.Keyword_if;
@@ -226,10 +227,13 @@ public class LexAnalyzer extends FileUtil
 
     public static void main(String argv[])
     {
-//        setIO(argv[0], argv[1]);
+        // args[0] = input file to be read/process tokens
+        // args[1] = output file to write the tokens to
+
+        setIO(argv[0], argv[1]);
 
         setIO("/Users/hamidurrahman/Downloads/GitHub/Project--LexicalAnalyzer/src/inputs/in7.txt",
-                "/Users/hamidurrahman/Downloads/GitHub/Project--LexicalAnalyzer/src/outputs/out1.txt");
+                "/Users/hamidurrahman/Downloads/GitHub/Project--LexicalAnalyzer/src/outputs/out7.txt");
 
         int i;
 
@@ -237,9 +241,9 @@ public class LexAnalyzer extends FileUtil
         {
             i = driver();
             if (i == 1)
-                displayln( t + "   : " + state.toString());
+                displayln( token + "   : " + state.toString());
             else if (i == 0)
-                displayln( t + " : Lexical Error, invalid token");
+                displayln( token + " : Lexical Error, invalid token");
         }
 
         closeIO();
