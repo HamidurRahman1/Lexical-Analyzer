@@ -198,7 +198,7 @@ public class LexAnalyzer extends FileUtil
 
     public static State isKeyword()
     {
-        switch (token)
+        switch(token)
         {
             case "if":
                 return State.Keyword_if;
@@ -231,9 +231,6 @@ public class LexAnalyzer extends FileUtil
         // args[1] = output file to write the tokens to
 
         setIO(argv[0], argv[1]);
-
-        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--LexicalAnalyzer/src/inputs/in7.txt",
-                "/Users/hamidurrahman/Downloads/GitHub/Project--LexicalAnalyzer/src/outputs/out7.txt");
 
         int i;
 
